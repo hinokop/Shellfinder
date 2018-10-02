@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root!"
+   echo "Try: sudo ./install"
+   exit 1
+fi
+usrbin=/usr/bin/shellfinder
+cmd="python3 $PWD/shellfinder.py"
+touch $usrbin
+if [ -f "$usrbin" ]
+then
+    echo "#!/bin/bash" > "$usrbin"
+    echo $cmd >> "$usrbin"
+    chmod +x $usrbin
+    echo "shellfinder => python3 $PWD/shellfinder.py"
+fi
